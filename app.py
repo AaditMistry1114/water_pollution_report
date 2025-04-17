@@ -112,7 +112,7 @@ def update_report(report_id):
         flash("Report updated successfully!", "success")
         return redirect(url_for('report_lists'))
 
-# Get current report data
+    # Get current report data
     my_cursor.execute("SELECT location_name, ph, color, contaminants FROM reports WHERE id = %s", (report_id,))
     report = my_cursor.fetchone()
     if report:
