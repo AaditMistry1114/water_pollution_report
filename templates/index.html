@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Water Quality Report</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar {
+      background-color: #E0115F;
+    }
+
+    .navbar .nav-link,
+    .navbar .navbar-brand {
+      color: #ffffff !important;
+      font-weight: 500;
+    }
+
+    .navbar .nav-link:hover,
+    .navbar .navbar-brand:hover {
+      color: black !important;
+    }
+
+    .hero-section {
+      text-align: center;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .hero-section h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      color: #444;
+      margin-bottom: 40px;
+    }
+
+    .btn-pink {
+      background-color: #E0115F;
+      color: white;
+      padding: 14px 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 5px;
+      border: none;
+      transition: background 0.3s ease;
+    }
+
+    .btn-pink:hover {
+      background-color: #c20f53;
+    }
+
+    footer {
+      background: #f8f9fa;
+      padding: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .form-section {
+      padding: 60px 0;
+      background-color: #f4f4f4;
+    }
+
+    .form-section h2 {
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .form-control, .form-select {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="/">Water Quality Report</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/map">Map</a></li>
+          <li class="nav-item"><a class="nav-link" href="/reports">Reports</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contactus">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="main-header text-center py-4">
+    <div>
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" style="max-width: 500px; height: auto;">
+    </div>
+  </section>
+
+  <div class="hero-section">
+    <h1>Track Water Quality Around You</h1>
+    <p>Real-time reports. Smart insights. Safer communities.</p>
+  </div>
+
+  <!-- Info Cards -->
+<div class="container my-5">
+    <!-- Row 1 -->
+    <div class="row justify-content-center align-items-center mb-5 g-4">
+      <!-- Text Card -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title text-primary">Why Water Sanitation Matters</h5>
+            <p class="card-text text-muted">
+                Access to clean water and effective sanitation is fundamental to human health, environmental sustainability, and economic development. Contaminated water can carry deadly pathogens, leading to widespread illness and death—especially among children. Proper sanitation infrastructure prevents pollutants from entering water sources, ensuring safer water for drinking, cooking, and agriculture. Moreover, regular monitoring of water quality enables early detection of contaminants, helping communities 
+                respond quickly and protect both human populations and fragile ecosystems.            
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Image Card -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+            <img src="{{ url_for('static', filename='images/clean_water_1.jpg') }}" alt="Logo" style="max-width: 600px; height: auto;">
+        </div>
+      </div>
+    </div>
+  
+    <!-- Row 2 -->
+    <div class="row justify-content-center align-items-center mb-5 g-4">
+      <!-- Image Card -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+            <img src="{{ url_for('static', filename='images/sanitation.jpg') }}" alt="Logo" style="max-width: 600px; height: auto;">
+        </div>
+      </div>
+      <!-- Text Card -->
+      <div class="col-md-6">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body">
+            <h5 class="card-title text-primary">The Impact of Sanitation</h5>
+            <p class="card-text text-muted">
+                Proper sanitation is a cornerstone of public health. It involves the safe management of human waste, clean toilet facilities, and effective wastewater treatment. Inadequate sanitation can lead to the spread of waterborne diseases like cholera, diarrhea, and typhoid, which disproportionately affect vulnerable communities. By investing in improved sanitation systems, we not only prevent disease outbreaks but also promote human dignity, 
+                protect water sources from contamination, and contribute to a healthier, more resilient society.            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Section 2: Report form submission -->
+    <section class="form-section"">
+    <div class="container">
+      <h2 class="text-center">Contribute a Water Quality Report</h2>
+      <form method="POST" action="/map">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <input type="text" name="location" class="form-control" placeholder="Enter Location" required />
+            <input type="number" step="0.01" name="ph" class="form-control" placeholder="Enter pH Value" required />
+            <select class="form-select" name="color" required>
+              <option value="Clear">Clear 🟢</option>
+              <option value="Yellow">Yellow 🟡</option>
+              <option value="Brown">Brown 🟤</option>
+              <option value="Red">Red 🔴</option>
+              <option value="Black">Black ⚫</option>
+            </select>
+            <input type="text" name="contaminants" class="form-control" placeholder="Contaminants (if any)" />
+            <div class="text-center mt-4">
+              <button type="submit" class="btn btn-pink">Submit & View on Map</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+    <!-- Section 3: How This Project Helps -->
+    <div class="container-fluid py-5" style="background-color: #eaf6f6;">
+        <div class="container">
+          <h2 class="text-center mb-4">How This Project Helps</h2>
+          <p class="lead text-center text-muted mb-4">
+            Our web application empowers communities to contribute to water quality awareness by submitting local water reports.
+            By tracking pH levels, contaminants, and water appearance, we help identify early signs of unsafe water sources.
+            This community-driven data can support local authorities, guide sanitation interventions, and promote environmental accountability.
+          </p>
+          <p class="text-center">
+            <a href="/map" class="btn btn-pink">View Map Reports</a>
+          </p>
+        </div>
+      </div>
+      
+  <footer class="text-white py-3 mt-5" style="background-color: #E0115F;">
+    <div class="container text-center">
+      <p class="mb-1">🌍 Water Quality Awareness Initiative</p>
+      <small class="d-block mb-1">Made with ❤️ for a cleaner planet.</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
